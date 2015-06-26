@@ -1,0 +1,7 @@
+<datastore-indexes autoGenerate="false">
+
+    <datastore-index kind="TSSlice" ancestor="false">
+        <property name="seq" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>
