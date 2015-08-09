@@ -4,4 +4,9 @@
         <property name="seq" direction="asc"/>
     </datastore-index>
 
+    <datastore-index kind="TS" ancestor="false" source="manual">
+        <property name="family" direction="asc"/>
+        <property name="lastUpdate" direction="asc"/>
+    </datastore-index>
+
 </datastore-indexes>

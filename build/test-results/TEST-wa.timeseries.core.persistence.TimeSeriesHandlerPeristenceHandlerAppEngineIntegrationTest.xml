@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="wa.timeseries.core.persistence.TimeSeriesHandlerPeristenceHandlerAppEngineIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-06-28T19:07:28" hostname="taz-laptop" time="3.144">
+  <properties/>
+  <testcase name="testGetUpdates" classname="wa.timeseries.core.persistence.TimeSeriesHandlerPeristenceHandlerAppEngineIntegrationTest" time="3.144"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Jun 28, 2015 7:07:29 PM com.google.appengine.api.datastore.dev.LocalDatastoreService init
+INFO: Local Datastore initialized: 
+	Type: Master/Slave
+	Storage: In-memory
+]]></system-err>
+</testsuite>
