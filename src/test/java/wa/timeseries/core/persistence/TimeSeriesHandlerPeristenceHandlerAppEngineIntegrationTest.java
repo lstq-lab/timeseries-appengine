@@ -19,7 +19,7 @@ public class TimeSeriesHandlerPeristenceHandlerAppEngineIntegrationTest {
     private final LocalServiceTestHelper helper =
             new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
 
-    private TimeSeriesID TS_ID = new TimeSeriesID("ts","1");
+    private TimeSeriesID TS_ID = new TimeSeriesID("ts","v-1");
 
     @Before
     public void setUp() {
@@ -43,7 +43,7 @@ public class TimeSeriesHandlerPeristenceHandlerAppEngineIntegrationTest {
         ts.add(TS_ID, 10, 0);
         ts.add(TS_ID, 11, 1);
 
-        TimeSeriesID TS_ID_2 = new TimeSeriesID("ts","2");
+        TimeSeriesID TS_ID_2 = new TimeSeriesID("ts","v-2");
         ts.add(TS_ID_2, 9, 0);
 
         Iterator<TimeSeries<Integer>> updates =

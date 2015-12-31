@@ -1,10 +1,7 @@
 package wa.timeseries.core.persistence;
 
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import wa.timeseries.core.SeriesSlice;
-import wa.timeseries.core.TimeSeries;
-import wa.timeseries.core.TimeSeriesConfiguration;
-import wa.timeseries.core.TimeSeriesID;
+import wa.timeseries.core.*;
 import wa.timeseries.core.persistence.serializer.IValueSerializer;
 
 import java.util.Iterator;
@@ -48,5 +45,15 @@ public class TimeSeriesPeristenceHandlerAppEngine<T> implements
 
     @Override public void persist(TimeSeries timeSeries) {
         tsPersistHandler.persist(timeSeries);
+    }
+
+    @Override
+    public SeriesSlice<T> newSlice(long sliceSeq, int sliceSize,
+            int maxResolution) {
+        return new SeriesSlice<T>(sliceSeq, sliceSize, maxResolution);
+    }
+
+    @Override public TimeSeries<T> createNewTimeSeries(TimeSeriesID tsId) {
+        return  new TimeSeries(tsId, null);
     }
 }

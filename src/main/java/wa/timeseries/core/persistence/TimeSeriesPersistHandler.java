@@ -35,7 +35,7 @@ public class TimeSeriesPersistHandler<T> {
     public Iterator<TimeSeries<T>> getUpdates(TimeSeriesConfiguration configuration, String family,
             long date) {
 
-        LOG.fine("Querying for Updates. Family:" + family + ", date: " + date);
+        LOG.info("Querying for Updates. Family:" + family + ", date: " + date);
 
         Query.Filter startFilter =
                 new Query.FilterPredicate(FAMILY,
@@ -67,10 +67,12 @@ public class TimeSeriesPersistHandler<T> {
         return result.iterator();
     }
 
-    public TimeSeries<T> get(TimeSeriesID tsId) {
+    public TimeSeries<T> get(final TimeSeriesID tsId) {
         try {
+            final Key tsKey = getTSKey(tsId);
+            LOG.info("Getting TS: " + tsKey);
             Entity entity =
-                    datastore.get(getTSKey(tsId));
+                    datastore.get(tsKey);
             return fromEntity(entity);
         } catch (EntityNotFoundException e) {
             return null;

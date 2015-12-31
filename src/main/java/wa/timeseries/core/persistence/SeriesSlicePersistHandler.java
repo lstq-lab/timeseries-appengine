@@ -4,10 +4,7 @@ import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
-import wa.timeseries.core.OffsetValue;
-import wa.timeseries.core.SeriesSlice;
-import wa.timeseries.core.TimeSeriesConfiguration;
-import wa.timeseries.core.TimeSeriesID;
+import wa.timeseries.core.*;
 import wa.timeseries.core.persistence.serializer.IValueSerializer;
 
 import java.lang.reflect.Array;
@@ -65,10 +62,10 @@ public class SeriesSlicePersistHandler<T> {
             values.add(serialized);
         }
 
-        entity.setProperty(MAX_SIZE, slice.getMaxSize());
-        entity.setProperty(MAX_RESOLUTION, slice.getMaxResolution());
+        entity.setUnindexedProperty(MAX_SIZE, slice.getMaxSize());
+        entity.setUnindexedProperty(MAX_RESOLUTION, slice.getMaxResolution());
         entity.setProperty(LAST_UPDATE, new Date());
-        entity.setProperty(VALUE, values);
+        entity.setUnindexedProperty(VALUE, values);
 
         return datastore.put(entity);
     }
@@ -101,9 +98,10 @@ public class SeriesSlicePersistHandler<T> {
     }
 
     private SeriesSliceWrapper<T> fromEntity(Entity entity) {
-        Long seq = Long.parseLong(entity.getKey().getName().split("-")[3]);
-        Integer maxSize = ((Number) entity.getProperty(MAX_SIZE)).intValue();
-        Integer maxRes =
+        final String[] keyComponents = entity.getKey().getName().split("-");
+        final Long seq = Long.parseLong(keyComponents[keyComponents.length-1]);
+        final Integer maxSize = ((Number) entity.getProperty(MAX_SIZE)).intValue();
+        final Integer maxRes =
                 ((Number) entity.getProperty(MAX_RESOLUTION)).intValue();
 
         ArrayList<?> values = (ArrayList) entity.getProperty(VALUE);
